@@ -14,13 +14,16 @@
             --goodreads-brown: #382110;
             --goodreads-tan: #F4F1EA;
             --goodreads-green: #3B8B6B;
+            --goodreads-success: #28a745;
+            --goodreads-error: #dc3545;
         }
         
         body {
             font-family: 'Source Sans Pro', sans-serif;
             background-color: var(--goodreads-tan);
+            padding-top: 60px;
         }
-        
+
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Merriweather', serif;
             color: var(--goodreads-brown);
@@ -28,6 +31,11 @@
 
         .navbar {
             background-color: var(--goodreads-brown) !important;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
         }
 
         .navbar-brand {
@@ -114,6 +122,55 @@
             background-color: var(--goodreads-brown);
             color: white;
         }
+
+        .alert-success {
+            background-color: rgba(59, 139, 107, 0.1);
+            border: none;
+            border-left: 4px solid var(--goodreads-green);
+            color: var(--goodreads-green);
+            border-radius: 0;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        .alert-danger {
+            background-color: rgba(220, 53, 69, 0.1);
+            border: none;
+            border-left: 4px solid var(--goodreads-error);
+            color: var(--goodreads-error);
+            border-radius: 0;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .page-header {
+            position: sticky;
+            top: 60px;
+            background-color: var(--goodreads-tan);
+            padding: 1rem 0;
+            margin: -1rem 0 1rem;
+            z-index: 1020;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .container {
+            padding-top: 1rem;
+        }
     </style>
 </head>
 <body>
@@ -143,6 +200,11 @@
     </nav>
 
     <div class="container py-4">
+        @hasSection('header')
+            <div class="page-header">
+                @yield('header')
+            </div>
+        @endif
         @yield('content')
     </div>
 

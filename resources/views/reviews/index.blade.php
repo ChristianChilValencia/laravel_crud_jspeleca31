@@ -1,13 +1,15 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="d-flex justify-content-between align-items-center mb-4">
+@section('header')
+<div class="d-flex justify-content-between align-items-center">
     <h2 class="fw-bold m-0">Community Reviews</h2>
     <a href="{{ route('reviews.create') }}" class="btn btn-primary">
         <i class="bi bi-plus-lg"></i> Write Review
     </a>
 </div>
+@endsection
 
+@section('content')
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <i class="bi bi-check-circle-fill"></i> {{ session('success') }}
