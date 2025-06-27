@@ -17,75 +17,78 @@
     </div>
 @endif
 
-<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
     @forelse($books as $book)
         <div class="col">
-            <div class="card h-100 book-card">
-                <div class="card-body">
-                    <h4 class="card-title mb-3">
-                        <a href="{{ route('books.show', $book->id) }}" class="text-decoration-none text-dark">
-                            {{ $book->title }}
-                        </a>
-                    </h4>
-                    
-                    <div class="mb-3">
-                        <div class="text-muted mb-2">by 
-                            <a href="{{ route('authors.show', $book->author->id) }}" class="text-decoration-none text-dark fw-semibold">
-                                {{ $book->author->name }}
-                            </a>
-                        </div>
+            <div class="card h-100 book-card position-relative">
+                <a href="{{ route('books.show', $book->id) }}" class="text-decoration-none text-dark">
+                    <div class="card-body">
+                        <h4 class="card-title mb-3">{{ $book->title }}</h4>
                         
-                        @if($book->reviews_count > 0)
-                            <div class="d-flex align-items-center gap-2">
-                                <div class="rating">
-                                    @php
-                                        $rating = round($book->reviews_avg_rating * 2) / 2;
-                                        $fullStars = floor($rating);
-                                        $halfStar = $rating - $fullStars >= 0.5;
-                                    @endphp
-                                    
-                                    @for($i = 1; $i <= 5; $i++)
-                                        @if($i <= $fullStars)
-                                            <i class="bi bi-star-fill"></i>
-                                        @elseif($i == ceil($rating) && $halfStar)
-                                            <i class="bi bi-star-half"></i>
-                                        @else
-                                            <i class="bi bi-star"></i>
-                                        @endif
-                                    @endfor
-                                </div>
-                                <span class="text-muted small">
-                                    {{ number_format($rating, 1) }} avg ({{ $book->reviews_count }} {{ Str::plural('review', $book->reviews_count) }})
-                                </span>
+                        <div class="mb-3">
+                            <div class="text-muted mb-2">by 
+                                <span class="fw-semibold">{{ $book->author->name }}</span>
                             </div>
-                        @else
-                            <div class="text-muted small">No reviews yet</div>
-                        @endif
-                    </div>
+                            
+                            @if($book->reviews_count > 0)
+                                <div class="d-flex align-items-center gap-2">
+                                    <div class="rating">
+                                        @php
+                                            $rating = round($book->reviews_avg_rating * 2) / 2;
+                                            $fullStars = floor($rating);
+                                            $halfStar = $rating - $fullStars >= 0.5;
+                                        @endphp
+                                        
+                                        @for($i = 1; $i <= 5; $i++)
+                                            @if($i <= $fullStars)
+                                                <i class="bi bi-star-fill"></i>
+                                            @elseif($i == ceil($rating) && $halfStar)
+                                                <i class="bi bi-star-half"></i>
+                                            @else
+                                                <i class="bi bi-star"></i>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                    <span class="text-muted small">
+                                        {{ number_format($rating, 1) }} avg ({{ $book->reviews_count }} {{ Str::plural('review', $book->reviews_count) }})
+                                    </span>
+                                </div>
+                            @else
+                                <div class="text-muted small">No reviews yet</div>
+                            @endif
+                        </div>
 
-                    <div class="mb-3">
-                        @forelse($book->genres as $genre)
-                            <a href="{{ route('genres.show', $genre->id) }}" class="badge rounded-pill text-decoration-none">
-                                {{ $genre->name }}
-                            </a>
-                        @empty
-                            <span class="text-muted small">No genres assigned</span>
-                        @endforelse
+                        <div class="mb-3">
+                            @forelse($book->genres as $genre)
+                                <span class="badge rounded-pill">{{ $genre->name }}</span>
+                            @empty
+                                <span class="text-muted small">No genres assigned</span>
+                            @endforelse
+                        </div>
                     </div>
-
-                    <div class="d-flex gap-2">
-                        <a href="{{ route('books.show', $book->id) }}" class="btn btn-sm btn-primary">
-                            <i class="bi bi-eye"></i> View
-                        </a>
-                        <a href="{{ route('books.edit', $book->id) }}" class="btn btn-sm btn-outline-secondary">
-                            <i class="bi bi-pencil"></i> Edit
-                        </a>
-                        <form action="{{ route('books.destroy', $book->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this book?')">
-                            @csrf @method('DELETE')
-                            <button class="btn btn-sm btn-outline-danger">
-                                <i class="bi bi-trash"></i>
-                            </button>
-                        </form>
+                </a>
+                
+                <div class="position-absolute top-0 end-0 p-3">
+                    <div class="dropdown">
+                        <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-three-dots-vertical"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('books.edit', $book->id) }}">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                            </li>
+                            <li>
+                                <form action="{{ route('books.destroy', $book->id) }}" method="POST" 
+                                      onsubmit="return confirm('Are you sure you want to delete this book?')">
+                                    @csrf @method('DELETE')
+                                    <button class="dropdown-item text-danger">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
