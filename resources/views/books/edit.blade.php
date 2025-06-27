@@ -31,15 +31,34 @@
 
     <div class="mb-3">
         <label>Genres</label>
-        <select name="genres[]" class="form-control" multiple>
+        <div class="genre-chips d-flex flex-wrap gap-2 mb-2">
             @foreach($genres as $genre)
-                <option value="{{ $genre->id }}" {{ $book->genres->contains($genre->id) ? 'selected' : '' }}>
-                    {{ $genre->name }}
-                </option>
+                <div class="genre-chip">
+                    <input type="checkbox" name="genres[]" value="{{ $genre->id }}" 
+                           id="genre{{ $genre->id }}" class="btn-check"
+                           {{ $book->genres->contains($genre->id) ? 'checked' : '' }}>
+                    <label for="genre{{ $genre->id }}" class="btn btn-outline-secondary btn-sm rounded-pill">
+                        {{ $genre->name }}
+                    </label>
+                </div>
             @endforeach
-        </select>
+        </div>
+        @error('genres') <div class="text-danger small">{{ $message }}</div> @enderror
     </div>
 
     <button class="btn btn-primary">Update</button>
 </form>
+
+<style>
+    .genre-chip input[type="checkbox"]:checked + label {
+        background-color: var(--goodreads-brown);
+        color: white;
+        border-color: var(--goodreads-brown);
+    }
+    .genre-chip label:hover {
+        background-color: var(--goodreads-brown);
+        color: white;
+        border-color: var(--goodreads-brown);
+    }
+</style>
 @endsection
