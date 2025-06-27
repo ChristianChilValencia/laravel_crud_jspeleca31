@@ -19,11 +19,17 @@
                     
                     <div class="col-md-8">
                         <h1 class="h2 mb-2">{{ $book->title }}</h1>
-                        <h2 class="h5 text-muted mb-4">by {{ $book->author->name }}</h2>
+                        <h2 class="h5 text-muted mb-4">by 
+                            <a href="{{ route('authors.show', $book->author->id) }}" class="text-decoration-none text-dark">
+                                {{ $book->author->name }}
+                            </a>
+                        </h2>
                         
                         <div class="mb-4">
                             @foreach($book->genres as $genre)
-                                <span class="badge rounded-pill me-1">{{ $genre->name }}</span>
+                                <a href="{{ route('genres.show', $genre->id) }}" class="badge rounded-pill text-decoration-none me-1">
+                                    {{ $genre->name }}
+                                </a>
                             @endforeach
                         </div>
 
@@ -47,11 +53,13 @@
                                             @endif
                                         @endfor
                                     </div>
-                                    <span class="fs-4">{{ number_format($rating, 1) }}</span>
-                                </div>
-                                <div class="text-muted">
-                                    {{ $reviewsCount }} {{ Str::plural('rating', $reviewsCount) }} · 
-                                    {{ $reviewsCount }} {{ Str::plural('review', $reviewsCount) }}
+                                    <div>
+                                        <span class="fs-4">{{ number_format($rating, 1) }}</span>
+                                    </div>
+                                    <div class="text-muted">
+                                        {{ $reviewsCount }} {{ Str::plural('rating', $reviewsCount) }} · 
+                                        {{ $reviewsCount }} {{ Str::plural('review', $reviewsCount) }}
+                                    </div>
                                 </div>
                             </div>
                         @endif
@@ -161,7 +169,7 @@
             <div class="card-body">
                 <h4 class="card-title h5 mb-3">About the Author</h4>
                 <h5 class="h6 mb-3">{{ $book->author->name }}</h5>
-                <a href="{{ route('authors.index') }}" class="btn btn-outline-secondary btn-sm">
+                <a href="{{ route('authors.show', $book->author->id) }}" class="btn btn-outline-secondary btn-sm">
                     <i class="bi bi-person"></i> View Author Profile
                 </a>
             </div>
@@ -173,7 +181,7 @@
                 <h4 class="card-title h5 mb-3">Genres</h4>
                 <div class="d-flex flex-wrap gap-2">
                     @foreach($book->genres as $genre)
-                        <a href="{{ route('genres.index') }}" class="badge rounded-pill text-decoration-none">
+                        <a href="{{ route('genres.show', $genre->id) }}" class="badge rounded-pill text-decoration-none">
                             {{ $genre->name }}
                         </a>
                     @endforeach

@@ -29,7 +29,7 @@
                         
                         <div class="mb-3">
                             <div class="text-muted mb-2">by 
-                                <a href="{{ route('authors.index') }}" class="text-decoration-none text-dark fw-semibold">
+                                <a href="{{ route('authors.show', $book->author->id) }}" class="text-decoration-none text-dark fw-semibold">
                                     {{ $book->author->name }}
                                 </a>
                             </div>
@@ -64,7 +64,9 @@
 
                         <div class="mb-3">
                             @forelse($book->genres as $genre)
-                                <span class="badge rounded-pill">{{ $genre->name }}</span>
+                                <a href="{{ route('genres.show', $genre->id) }}" class="badge rounded-pill text-decoration-none">
+                                    {{ $genre->name }}
+                                </a>
                             @empty
                                 <span class="text-muted small">No genres assigned</span>
                             @endforelse

@@ -53,5 +53,14 @@ class AuthorController extends Controller
         return redirect()->route('authors.index')
         ->with('success','Author deleted successfully.');
     }
+
+    public function show(Author $author)
+    {
+        $author->load(['books' => function($query) {
+            $query->withCount('reviews')
+                  ->withAvg('reviews', 'rating');
+        }]);
+        return view('authors.show', compact('author'));
+    }
 }
 

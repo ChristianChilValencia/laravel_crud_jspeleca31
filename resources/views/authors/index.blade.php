@@ -25,7 +25,11 @@
                             <div class="bg-secondary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 60px; height: 60px">
                                 <i class="bi bi-person text-muted" style="font-size: 1.5rem;"></i>
                             </div>
-                            <h4 class="card-title mb-0">{{ $author->name }}</h4>
+                            <h4 class="card-title mb-0">
+                                <a href="{{ route('authors.show', $author->id) }}" class="text-decoration-none text-dark">
+                                    {{ $author->name }}
+                                </a>
+                            </h4>
                         </div>
 
                         <div class="mb-3">
@@ -44,6 +48,9 @@
                         </div>
 
                         <div class="d-flex gap-2">
+                            <a href="{{ route('authors.show', $author->id) }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-eye"></i> View
+                            </a>
                             <a href="{{ route('authors.edit', $author->id) }}" class="btn btn-sm btn-outline-secondary">
                                 <i class="bi bi-pencil"></i> Edit
                             </a>

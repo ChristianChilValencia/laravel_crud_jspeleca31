@@ -44,5 +44,15 @@ class GenreController extends Controller
         $genre->delete();
         return redirect()->route('genres.index');
     }
+
+    public function show(Genre $genre)
+    {
+        $genre->load(['books' => function($query) {
+            $query->with('author')
+                  ->withCount('reviews')
+                  ->withAvg('reviews', 'rating');
+        }]);
+        return view('genres.show', compact('genre'));
+    }
 }
 

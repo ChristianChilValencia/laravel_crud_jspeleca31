@@ -25,7 +25,11 @@
                             <div class="bg-secondary bg-opacity-10 rounded d-flex align-items-center justify-content-center me-3" style="width: 48px; height: 48px">
                                 <i class="bi bi-bookmark text-muted"></i>
                             </div>
-                            <h4 class="card-title mb-0">{{ $genre->name }}</h4>
+                            <h4 class="card-title mb-0">
+                                <a href="{{ route('genres.show', $genre->id) }}" class="text-decoration-none text-dark">
+                                    {{ $genre->name }}
+                                </a>
+                            </h4>
                         </div>
 
                         @if ($genre->books_count > 0)
@@ -44,6 +48,9 @@
                         @endif
 
                         <div class="d-flex gap-2">
+                            <a href="{{ route('genres.show', $genre->id) }}" class="btn btn-sm btn-primary">
+                                <i class="bi bi-eye"></i> View
+                            </a>
                             <a href="{{ route('genres.edit', $genre->id) }}" class="btn btn-sm btn-outline-secondary">
                                 <i class="bi bi-pencil"></i> Edit
                             </a>
