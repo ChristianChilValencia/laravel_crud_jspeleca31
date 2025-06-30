@@ -33,7 +33,7 @@
                         <div class="mb-3">
                             <h6 class="text-muted mb-2">Published Books ({{ $author->books_count }})</h6>
                             @if ($author->books_count > 0)
-                                <div class="d-flex flex-wrap gap-2">
+                                <div class="d-flex flex-wrap gap-2 book-list" style="max-height: 4.5rem; overflow: hidden;">
                                     @foreach($author->books as $book)
                                         <span class="badge bg-secondary bg-opacity-10 text-dark">{{ $book->title }}</span>
                                     @endforeach

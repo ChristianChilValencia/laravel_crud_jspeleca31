@@ -11,7 +11,7 @@ class AuthorController extends Controller
     {
         $authors = Author::withCount('books')
             ->with('books')
-            ->paginate(9);
+            ->paginate(8);
         return view('authors.index', compact('authors'));
     }
 

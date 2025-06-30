@@ -33,7 +33,7 @@
                         @if ($genre->books_count > 0)
                             <div class="mb-3">
                                 <h6 class="text-muted mb-2">{{ $genre->books_count }} {{ Str::plural('Book', $genre->books_count) }}</h6>
-                                <div class="d-flex flex-wrap gap-2">
+                                <div class="d-flex flex-wrap gap-2 book-list" style="max-height: 4.5rem; overflow: hidden;">
                                     @foreach($genre->books as $book)
                                         <span class="badge bg-secondary bg-opacity-10 text-dark">{{ $book->title }}</span>
                                     @endforeach

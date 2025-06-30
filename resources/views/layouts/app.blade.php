@@ -91,6 +91,22 @@
             transform: translateY(-5px);
         }
 
+        .card-title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            min-height: 3rem;
+        }
+
+        .badge {
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
         .rating {
             color: #FF9529;
         }
@@ -170,6 +186,29 @@
 
         .container {
             padding-top: 1rem;
+        }
+
+        /* Pagination Styling */
+        .page-link {
+            color: var(--goodreads-green);
+            background-color: #fff;
+            border-color: #dee2e6;
+        }
+
+        .page-link:hover {
+            color: #2d6b52;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+
+        .page-item.active .page-link {
+            background-color: var(--goodreads-green);
+            border-color: var(--goodreads-green);
+            color: #fff;
+        }
+
+        .page-item.disabled .page-link {
+            color: #6c757d;
         }
     </style>
 </head>
