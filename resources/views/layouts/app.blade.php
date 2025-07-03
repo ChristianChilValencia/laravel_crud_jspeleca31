@@ -220,19 +220,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="nav ms-auto">
-                    <a href="{{ route('books.index') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">
-                        <i class="bi bi-book"></i> Books
-                    </a>
-                    <a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}">
-                        <i class="bi bi-person"></i> Authors
-                    </a>
-                    <a href="{{ route('genres.index') }}" class="nav-link {{ request()->is('genres*') ? 'active' : '' }}">
-                        <i class="bi bi-tags"></i> Genres
-                    </a>
-                    <a href="{{ route('reviews.index') }}" class="nav-link {{ request()->is('reviews*') ? 'active' : '' }}">
-                        <i class="bi bi-star"></i> Reviews
-                    </a>
+                <div class="nav ms-auto align-items-center">
+                    @if (!request()->routeIs('login') && !request()->routeIs('register'))
+                        <a href="{{ route('books.index') }}" class="nav-link {{ request()->is('books*') ? 'active' : '' }}">
+                            <i class="bi bi-book"></i> Books
+                        </a>
+                        <a href="{{ route('authors.index') }}" class="nav-link {{ request()->is('authors*') ? 'active' : '' }}">
+                            <i class="bi bi-person"></i> Authors
+                        </a>
+                        <a href="{{ route('genres.index') }}" class="nav-link {{ request()->is('genres*') ? 'active' : '' }}">
+                            <i class="bi bi-tags"></i> Genres
+                        </a>
+                        <a href="{{ route('reviews.index') }}" class="nav-link {{ request()->is('reviews*') ? 'active' : '' }}">
+                            <i class="bi bi-star"></i> Reviews
+                        </a>
+                        @auth
+                            <form method="POST" action="{{ route('logout') }}" class="d-inline ms-3">
+                                @csrf
+                                <button type="submit" class="btn btn-link nav-link" style="display:inline; padding:0; color:rgba(255,255,255,0.8);">
+                                    <i class="bi bi-box-arrow-right"></i> Logout
+                                </button>
+                            </form>
+                        @endauth
+                    @endif
                 </div>
             </div>
         </div>
