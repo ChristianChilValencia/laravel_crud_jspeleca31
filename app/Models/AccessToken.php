@@ -46,4 +46,9 @@ class AccessToken extends Model
                    ->where('expires_at', '>', now())
                    ->exists();
     }
+
+    public function isExpired()
+    {
+        return $this->expires_at && $this->expires_at->isPast();
+    }
 }

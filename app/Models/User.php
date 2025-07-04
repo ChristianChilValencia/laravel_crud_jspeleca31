@@ -45,4 +45,10 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relationship to AccessToken
+    public function tokens()
+    {
+        return $this->hasMany(\App\Models\AccessToken::class);
+    }
 }
