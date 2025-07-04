@@ -4,7 +4,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use Illuminate\Http\Request;
 
+Route::get('/test-api', function () {
+    return response()->json(['message' => 'API is working']);
+});
 
 // Public routes
 Route::post('/register', [AuthController::class, 'register']);
