@@ -1,4 +1,3 @@
-// Logout route (API)
 <?php
 
 use Illuminate\Support\Facades\Route;
